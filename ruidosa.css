@@ -1,0 +1,78 @@
+:root {
+    --purple: #9568F4;
+    --orange: #EA9F67;
+}
+
+body {
+    background-color: #282828;
+    color: #FFF;
+
+    font-family: "futura-pt", sans-serif;
+    font-weight: 400;
+    
+    letter-spacing: 0%;
+}
+
+.wrapper {
+    max-width: 932px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 48px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.purple, .orange {
+    font-weight: 700;
+    font-style: bold;
+    line-height: 68px;
+}
+
+.purple {
+    background-color: var(--purple);
+}
+
+.orange {
+    background-color: var(--orange);
+}
+
+.quote1 {
+    background-image: url("images/quote1.png");
+}
+
+.quote1:before {
+    background-image: url("images/quote1face.svg");
+    content: "";
+    width: 370px;
+    content: " ";
+    position: absolute;
+    left: -330px;
+    top: 60px;
+    height:330px;
+}
+
+.quote {
+    width: 645px;
+    height: 416px;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+}
+
+.quote-text {
+    max-width: 532px;
+    font-weight: 500;
+    font-size: 18px;
+    font-style: italic;
+    text-align: center;
+    margin: 22% auto;
+}
+
+.right {
+    float: right;
+}
