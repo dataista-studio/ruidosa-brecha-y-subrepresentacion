@@ -9,6 +9,7 @@ body {
 
     font-family: "futura-pt", sans-serif;
     font-weight: 400;
+    font-size: 18px;
     
     letter-spacing: 0%;
 }
@@ -88,6 +89,8 @@ body {
 
 .quotes {
     height: auto;
+    margin-top: 12px;
+    margin-bottom: 60px;
 }
 
 .quote {
@@ -123,4 +126,29 @@ body {
 
 .microphones {
     display: block;
+    background-image: url("images/microphones.png");
+    width: 100%;
+    height: 209px;
+    margin-bottom: 60px;
+}
+
+.chairs {
+    display: block;
+    background-image: url("images/chairs.png");
+    width: 100%;
+    height: 254px;
+}
+
+.infographic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.infographic-text {
+    max-width: 571px;
+    padding: 22px 40px;
+    font-weight: 500;
+    background-color: rgba(40,40,40,0.8);
+    text-align: center;
 }
