@@ -45,6 +45,14 @@ body {
     background-image: url("images/quote1.png");
 }
 
+.quote2 {
+    background-image: url("images/quote2.png");
+}
+
+.quote3 {
+    background-image: url("images/quote3.png");
+}
+
 .quote1:before {
     background-image: url("images/quote1face.svg");
     content: "";
