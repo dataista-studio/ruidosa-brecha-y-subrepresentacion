@@ -59,17 +59,43 @@ body {
     width: 370px;
     content: " ";
     position: absolute;
-    left: -330px;
+    left: -322px;
     top: 60px;
-    height:330px;
+    height: 330px;
+}
+
+.quote2:after {
+    background-image: url("images/quote1face.svg");
+    content: "";
+    width: 370px;
+    content: " ";
+    position: absolute;
+    right: -290px;
+    top: 60px;
+    height: 330px;
+}
+
+.quote3:before {
+    background-image: url("images/quote1face.svg");
+    content: "";
+    width: 370px;
+    content: " ";
+    position: absolute;
+    left: -322px;
+    top: 60px;
+    height: 330px;
+}
+
+.quotes {
+    height: auto;
 }
 
 .quote {
     width: 645px;
     height: 416px;
-    vertical-align: middle;
-    display: inline-block;
+    display: block;
     position: relative;
+    text-align: right;
 }
 
 .quote-text {
@@ -78,9 +104,23 @@ body {
     font-size: 18px;
     font-style: italic;
     text-align: center;
-    margin: 22% auto;
+    position: absolute;
+    top: 28%;
 }
 
 .right {
-    float: right;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.right .quote-text {
+    left: 12%;
+}
+
+.left .quote-text {
+    left: 5%;
+}
+
+.microphones {
+    display: block;
 }
