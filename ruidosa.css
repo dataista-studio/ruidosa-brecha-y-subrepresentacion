@@ -178,11 +178,21 @@ body {
 }
 
 .interactive-text {
-    font-weight: 700;
     display: block;
 }
 
-.text {
+.bold-text {
+    font-weight: 700;
+}
+
+.text-width {
     max-width: 595px;
+}
+
+.centered { 
     margin: 0 auto;
+}
+
+.bandas-colores {
+    max-width: 814px;
 }
