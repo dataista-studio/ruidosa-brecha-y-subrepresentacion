@@ -171,3 +171,13 @@ body {
 .right-col {
     display: inline-block;
 }
+
+.title2 {
+    height: 133px;
+    width: 808px;
+}
+
+.interactive-text {
+    font-weight: 700;
+    display: block;
+}
