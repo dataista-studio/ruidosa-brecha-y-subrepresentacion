@@ -205,3 +205,17 @@ body {
 .tras-escenarios {
     width: 472px;
 }
+
+.call-action {
+    width: 877px;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer img {
+    vertical-align: middle;
+    margin-left: 8px;
+}
