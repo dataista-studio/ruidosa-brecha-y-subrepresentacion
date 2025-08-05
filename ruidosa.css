@@ -187,6 +187,7 @@ body {
 
 .text-width {
     max-width: 595px;
+    line-height: 28px;
 }
 
 .centered { 
@@ -195,4 +196,8 @@ body {
 
 .bandas-colores {
     max-width: 814px;
+}
+
+.disparidad-geografica {
+    width: 355px;
 }
