@@ -8,7 +8,7 @@ body {
     color: #FFF;
 
     font-family: "futura-pt", sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 18px;
     
     letter-spacing: 0%;
@@ -156,6 +156,7 @@ body {
 .circles {
     display: flex;
     justify-content: space-between;
+    line-height: 28px;
 }
 
 .left-col {
