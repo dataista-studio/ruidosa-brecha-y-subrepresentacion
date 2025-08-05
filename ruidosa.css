@@ -181,3 +181,8 @@ body {
     font-weight: 700;
     display: block;
 }
+
+.text {
+    max-width: 595px;
+    margin: 0 auto;
+}
