@@ -311,3 +311,24 @@ body {
     fill: #000;
     font-weight: 700;
   }
+
+  .disparidad-legend-item {
+    text-align: center;
+    display: inline-block;
+    border-radius: 30px;
+    width: 140px;
+    color: #282828;
+    font-style: italic;
+  }
+
+  .disparidad-norte {
+    background-color: #E2F44F;
+  }
+
+  .disparidad-latam {
+    background-color: #9568F4;
+  }
+
+  .disparidad-otros {
+    background-color: #FFF;
+  }
