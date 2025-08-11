@@ -319,6 +319,8 @@ body {
     width: 140px;
     color: #282828;
     font-style: italic;
+    padding: 6px 0;
+    font-size: 16px;
   }
 
   .disparidad-norte {
