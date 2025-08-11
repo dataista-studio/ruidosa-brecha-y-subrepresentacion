@@ -89,7 +89,20 @@
             De los 164 lineups que analizamos la composición general es la siguiente
         </div>
 
-        <div id="viz1"></div>
+        <div>
+            <div>
+                <div class="dropdown" id="dropdown-artist">
+                    <div class="dropbtn" id="dropbtn-artist"></div>
+                    <div id="content-artist" class="dropdown-content"></div>
+                </div>
+                <div class="dropdown" id="dropdown-anio">
+                    <div class="dropbtn" id="dropbtn-anio"></div>
+                    <div id="content-anio" class="dropdown-content"></div>
+                </div>
+            </div>
+            <div id="arriba-del-escenario"></div>
+        </div>
+        
 
         <div class="text-width centered">
             <p>Los solistas hombres y las bandas de hombres acapararon el 72% de todas las presentaciones. Las bandas de mujeres, por su parte, representaron una cifra casi marginal, con apenas 100 shows en tres años, lo que equivale a un escaso 1% del total.</p>
@@ -126,7 +139,10 @@
             De cada 10 artistas que se presentan en festivales latinoamericanos 6 son talentos locales y 4 son talentos extranjeros.
         </div>
 
-        <div id="viz2"></div>
+        <div>
+            
+            <div id="viz2"></div>
+        </div>
 
         <div class="text-width centered">
             A pesar de que la región es anfitriona, casi la mitad del talento es importado. Entre 2022 y 2024, el 56% de los shows en festivales fueron de artistas latinoamericanos, mientras que el 43% vino del Norte Global.<br/>
@@ -195,6 +211,8 @@
 
     </div>
 
-    <script src="./main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/ruidosa.js"></script>
   </body>
 </html>
