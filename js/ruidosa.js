@@ -27,7 +27,9 @@ Promise.all([
         .append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("viewBox", `0 0 ${width} ${height}`);
+
+    const legend = d3.select("#arriba-del-escenario-legend");
 
     const plotOrder = ["Bandas de mujeres", "Solista mujer", "Bandas mixtas",
         "Bandas de hombres", "Solista hombre", "Solista no binarie"
@@ -40,9 +42,8 @@ Promise.all([
     const nRows = 10;
     const circleSize = 46;
 
-    const getDataToPlot = (data, state) => {
-        const filteredData = filterData(data);
-
+    const getDataToPlot = (filteredData, state) => {
+        
         const outputData = [];
         let idx = 0;
 
@@ -62,7 +63,9 @@ Promise.all([
     }
 
     const updatePlot = (data, state, svg) => {
-        const dataToPlot = getDataToPlot(data, state);
+
+        const filteredData = filterData(data);
+        const dataToPlot = getDataToPlot(filteredData, state);
 
         const groups = svg.selectAll(".circle-group")
             .data(dataToPlot)
@@ -77,6 +80,16 @@ Promise.all([
                 .attr("width", circleSize)
                 .attr("height", circleSize)
                 .attr("xlink:href", d => `images/viz1/${d.img}`);
+
+        const legends = legend.selectAll('.legend')
+            .data(plotOrder)
+            .join("div")
+                .attr("class", "legend")
+                .style("background-image", d => `url("../images/viz1/${d} - background.png")`)
+                .html(d => {
+                    const datum = filteredData.find(dat => dat["tipo banda"] === d);
+                    return `${datum[state.anios]}% ${d}`
+                })
     }
 
     const updateDropdownHtml = (id, label) => {

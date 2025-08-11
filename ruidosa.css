@@ -283,3 +283,17 @@ body {
   
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
+
+  .legend {
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 500;
+    color: #282828;
+    line-height: 28px;
+    padding: 10px 12px;
+    background-repeat: no-repeat;
+  }
+
+  .legend:not(:last-child) {
+    margin-bottom: 12px;
+  }
