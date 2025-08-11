@@ -304,3 +304,10 @@ body {
     fill: #fff;
     font-style: italic;
   }
+
+  .text-label {
+    font-size: 32px;
+    text-transform: uppercase;
+    fill: #000;
+    font-weight: 700;
+  }

@@ -189,6 +189,15 @@ Promise.all([
                 .attr("width", d => x(d[1]) - x(d[0]))
                 .attr("fill", d => color(d.key))
 
+        g.selectAll(".text-label")
+            .data(D => D.map(d => (d.key = D.key, d)))
+            .join("text")
+                .attr("class", "text-label")
+                .style("text-anchor", "end")
+                .attr("x", d => x(d[1]) - 10)
+                .attr("y", d => y(d.data[0]) + y.bandwidth()/2 + 12)
+                .text(d => d[1] - d[0] > 2 ? `${d[1] - d[0]}%` : "")
+
 
     }
 
