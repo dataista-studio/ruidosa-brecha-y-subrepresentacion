@@ -4,18 +4,19 @@ const state = {
 }
 
 Promise.all([
-    d3.csv('datos/arriba del escenario.csv')
+    d3.csv('datos/arriba del escenario.csv'),
+    d3.csv('datos/disparidad geografica.csv')
 ]).then(function (ruidosa) {
     const data1 = ruidosa[0];
-    const stringCols = ["tipo banda", "artistas"]
-    const numberCols = data1.columns.filter(col => !stringCols.includes(col));
+    const stringCols1 = ["tipo banda", "artistas"]
+    const numberCols1 = data1.columns.filter(col => !stringCols1.includes(col));
     data1.forEach(datum => {
-        numberCols.forEach(col => {
+        numberCols1.forEach(col => {
             datum[col] = +datum[col];
         })
     });
 
-    const artistas = Array.from(new Set(data1.map(d => d['artistas'])));
+    const artistas1 = Array.from(new Set(data1.map(d => d['artistas'])));
 
     const width = 800;
     const height = 500;
@@ -62,7 +63,7 @@ Promise.all([
         return outputData;
     }
 
-    const updatePlot = (data, state, svg) => {
+    const updatePlot1 = (data, state, svg) => {
 
         const filteredData = filterData(data);
         const dataToPlot = getDataToPlot(filteredData, state);
@@ -96,7 +97,7 @@ Promise.all([
         d3.select(id).select(".dropbtn").html(label);
     }
 
-    const addDropdown = (id, options, label) => {
+    const addDropdown = (id, options, label, updatePlot) => {
         let opts = addOptions(`content-${id}`, options, options);
         d3.select(`#dropdown-${id}`)
             .on("click", function(d){
@@ -112,9 +113,11 @@ Promise.all([
         })
     }
 
-    updatePlot(data1, state, svg);
+    /* VIZ 1 */
+    updatePlot1(data1, state, svg);
+    addDropdown("artist", artistas1, "artista", updatePlot1);
+    addDropdown("anio", numberCols1, "anios", updatePlot1);
 
-    addDropdown("artist", artistas, "artista");
-    addDropdown("anio", numberCols, "anios");
+    /* VIZ 2 */
 
 })
