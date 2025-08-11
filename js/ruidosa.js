@@ -36,14 +36,14 @@ Promise.all([
         "Bandas de hombres", "Solista hombre", "Solista no binarie"
     ];
 
-    const filterData = (data) => {
+    const filterData1 = (data) => {
         return data.filter(d => d.artistas === state.artista);
     }
 
     const nRows = 10;
     const circleSize = 46;
 
-    const getDataToPlot = (filteredData, state) => {
+    const getDataToPlot1 = (filteredData, state) => {
         
         const outputData = [];
         let idx = 0;
@@ -65,8 +65,8 @@ Promise.all([
 
     const updatePlot1 = (data, state, svg) => {
 
-        const filteredData = filterData(data);
-        const dataToPlot = getDataToPlot(filteredData, state);
+        const filteredData = filterData1(data);
+        const dataToPlot = getDataToPlot1(filteredData, state);
 
         const groups = svg.selectAll(".circle-group")
             .data(dataToPlot)
