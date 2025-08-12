@@ -415,5 +415,85 @@ body {
     background-image: url("../images/viz5/cable.png");
   }
 
+  .bubbles {
+    position: relative;
+    height: 900px;
+  }
 
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    line-height: 24px !important;
+    color: #282828 !important;
+    font-weight: 500 !important;
+   
+  }
 
+  .bubble-text {
+    display: table;
+    width: 80%;
+    height: 80%;
+    margin-left: 10%;
+    margin-top: 10%;
+  }
+
+  .bubble-text p {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+  }
+
+  .bubble1 {
+    width: 322px;
+    height: 322px;
+    top: 10px;
+    left: 20px;
+  }
+  .bubble2 {
+    width: 251px;
+    height: 251px;
+    top: 50px;
+    left: 400px;
+  }
+  .bubble3 {
+    width: 261px;
+    height: 261px;
+    top: 160px;
+    left: 640px;
+  }
+  .bubble4 {
+    width: 302px;
+    height: 302px;
+    top: 300px;
+    left: 220px;
+  }
+  .bubble5 {
+    width: 200px;
+    height: 200px;
+    top: 400px;
+    left: 540px;
+  }
+  .bubble6 {
+    width: 274px;
+    height: 274px;
+    top: 560px;
+    left: 10px;
+  }
+  .bubble7 {
+    width: 200px;
+    height: 200px;
+    top: 610px;
+    left: 400px;
+  }
+
+  .pink {
+    background-color: #C883E5;
+  }
+
+  .green {
+    background-color: #E2F44F;
+  }
+
+  .yellow {
+    background-color: #F9D94E;
+  }
