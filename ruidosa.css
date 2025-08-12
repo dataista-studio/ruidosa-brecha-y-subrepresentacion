@@ -335,7 +335,8 @@ body {
     background-color: #FFF;
   }
 
-  #detras-del-escenario-legend{
+  #detras-del-escenario-legend,
+  #toma-de-decisiones {
     position: relative;
   }
 
@@ -353,6 +354,25 @@ body {
   }
 
   .Mujer {
+    background-color: #C883E5;
+  }
+
+  .toma-legend {
+    font-size: 28px;
+    text-transform: uppercase;
+    fill: #fff;
+    font-style: italic;
+  }
+
+  .toma-label {
+    position: absolute;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #282828;
+    font-weight: 500;
+    font-style: italic;
+    padding: 4px 14px;
+    border-radius: 30px;
     background-color: #C883E5;
   }
 

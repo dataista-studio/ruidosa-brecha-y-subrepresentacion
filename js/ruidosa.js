@@ -8,7 +8,8 @@ Promise.all([
     d3.csv('datos/arriba del escenario.csv'),
     d3.csv('datos/disparidad geografica.csv'),
     d3.csv('datos/disparidad geografica.csv'),
-    d3.csv('datos/detras del escenario.csv')
+    d3.csv('datos/detras del escenario.csv'),
+    d3.csv('datos/toma de decisiones.csv')
 ]).then(function (ruidosa) {
     const data1 = ruidosa[0];
     const stringCols1 = ["tipo banda", "artistas"]
@@ -30,7 +31,12 @@ Promise.all([
 
     const data4 = ruidosa[3];
     data4.forEach(d => {
-        d.Valor = + d.Valor;
+        d.Valor = +d.Valor;
+    });
+
+    const data5 = ruidosa[4];
+    data5.forEach(d => {
+        d.Mujer = +d.Mujer;
     });
 
     const artistas1 = Array.from(new Set(data1.map(d => d['artistas'])));
@@ -294,6 +300,68 @@ Promise.all([
 
     }
 
-    updatePlot4(data4, svg4)
+    updatePlot4(data4, svg4);
+
+    /* VIZ 5 */
+
+    const width5 = 800;
+    const height5 = 390;
+    const margin5 = {
+        top: 50, bottom: 10, left: 440, right: 60
+    };
+
+    const svg5 = d3.select("#toma-de-decisiones")
+        .append("svg")
+        .attr("width", width5)
+        .attr("height", height5)
+        .attr("viewBox", `0 0 ${width5} ${height5}`);
+
+    const updatePlot5 = (data, svg) => {
+
+        const sortedData = data.sort((a,b) => b.Mujer - a.Mujer);
+        const cargos = sortedData.map(d => d['Cargos sistematizado']);
+
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(sortedData, d => d.Mujer)])
+            .range([margin5.left, width4 - margin5.right]);
+
+        const y =  d3.scaleBand()
+            .domain(cargos)
+            .range([margin5.top, height4 - margin5.bottom])
+            .padding(0.4);
+
+        const g = svg.selectAll("g")
+            .data(sortedData)
+            .join("g")
+
+        g.selectAll('.toma-legend')
+            .data(cargos)
+            .join("text")
+                .attr("class", "toma-legend")
+                .style("text-anchor", "end")
+                .attr("x", x(0) - 10)
+                .attr("y", d => y(d) + y.bandwidth()/2 + 12)
+                .text(d => d)
+
+        g.selectAll("rect")
+            .data(sortedData)
+            .join("rect")
+                .attr("x", d => x(0))
+                .attr("y", d => y(d['Cargos sistematizado']))
+                .attr("height", y.bandwidth())
+                .attr("width", d => x(d.Mujer) - x(0))
+                .attr("fill", "#C883E5")
+
+        d3.select("#toma-de-decisiones")
+            .selectAll(".toma-label")
+            .data(sortedData)
+            .join("div")
+                .attr("class", "toma-label")
+                .style("left", d => `${x(d.Mujer) + 14}px`)
+                .style("top", d => `${y(d['Cargos sistematizado']) - y.bandwidth()/2 + 12}px`)
+                .html(d => `${d.Mujer}%`)
+    }
+
+    updatePlot5(data5, svg5);
 
 })
