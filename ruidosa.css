@@ -334,3 +334,25 @@ body {
   .disparidad-otros {
     background-color: #FFF;
   }
+
+  #detras-del-escenario-legend{
+    position: relative;
+  }
+
+  .sex-label {
+    position: absolute;
+    color: #282828;
+    font-size: 16px;
+    font-style: italic;
+    padding: 4px 14px;
+    border-radius: 30px;
+  }
+
+  .Hombre {
+    background-color: #F9D94E;
+  }
+
+  .Mujer {
+    background-color: #C883E5;
+  }
+

@@ -213,7 +213,7 @@ Promise.all([
     const width4 = 800;
     const height4 = 390;
     const margin4 = {
-        top: 10, bottom: 10, left: 330, right: 10
+        top: 50, bottom: 10, left: 330, right: 10
     };
 
     const svg4 = d3.select("#detras-del-escenario")
@@ -277,6 +277,19 @@ Promise.all([
                 .attr("x", d => d[1] - d[0] > 15 ? x(d[1]) - 10 : x(d[0]))
                 .attr("y", d => y(d.data[0]) + y.bandwidth()/2 + 12)
                 .text(d => d[1] - d[0] > 2 ? `${d[1] - d[0]}%` : "")
+
+        d3.select("#detras-del-escenario-legend")
+            .selectAll(".sex-label")
+            .data(series.map(D => 
+                D.filter(d => d.data[0] === plotOrder[0])
+                    .map(d => (d.key = D.key, d))
+            ))
+            .join("div")
+                .attr("class", d => `sex-label ${d[0].key}`)
+                // .style("text-anchor", "end")
+                .style("left", d => `${x(d[0][1]) - 80}px`)
+                .style("top", d => "12px")
+                .html(d => d[0].key === 'Mujer' ? 'mujeres' : 'hombres')
 
 
     }
