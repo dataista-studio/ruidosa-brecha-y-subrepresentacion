@@ -6,7 +6,9 @@ const state = {
 
 Promise.all([
     d3.csv('datos/arriba del escenario.csv'),
-    d3.csv('datos/disparidad geografica.csv')
+    d3.csv('datos/disparidad geografica.csv'),
+    d3.csv('datos/disparidad geografica.csv'),
+    d3.csv('datos/detras del escenario.csv')
 ]).then(function (ruidosa) {
     const data1 = ruidosa[0];
     const stringCols1 = ["tipo banda", "artistas"]
@@ -24,6 +26,11 @@ Promise.all([
         numberCols2.forEach(col => {
             datum[col] = +datum[col];
         })
+    });
+
+    const data4 = ruidosa[3];
+    data4.forEach(d => {
+        d.Valor = + d.Valor;
     });
 
     const artistas1 = Array.from(new Set(data1.map(d => d['artistas'])));
@@ -143,15 +150,12 @@ Promise.all([
         .attr("viewBox", `0 0 ${width2} ${height2}`);
 
     const updatePlot2 = (data, state, svg, label) => {
-        console.log('here')
         const colOrder = ["Norte Global", "Latinoamericanos", "Otro"];
 
         const series = d3.stack()
             .keys(d3.union(data.map(d => d["tipo show"]))) // distinct series keys, in input order
                 .value(([, D], key) => D.get(key)[state[label]]) // get value for each series key and stack
                 (d3.index(data, d => d["tipo banda"], d => d["tipo show"]));
-
-        console.log(d3.max(series, d => d3.max(d, d => d[1])))
 
         const x = d3.scaleLinear()
             .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
@@ -203,5 +207,80 @@ Promise.all([
 
     updatePlot2(data2, state, svg2, "anios2")
     addDropdown("anio2", numberCols2, "anios2", updatePlot2, svg2, data2);
+
+    /* VIZ 4 */
+
+    const width4 = 800;
+    const height4 = 390;
+    const margin4 = {
+        top: 10, bottom: 10, left: 330, right: 10
+    };
+
+    const svg4 = d3.select("#detras-del-escenario")
+        .append("svg")
+        .attr("width", width4)
+        .attr("height", height4)
+        .attr("viewBox", `0 0 ${width4} ${height4}`);
+
+    const updatePlot4 = (data, svg) => {
+        const colOrder = ["Mujer", "Hombre"];
+        const plotOrder = data.filter(d => d.Sexo === 'Mujer')
+            .sort((a,b) => b.Valor - a.Valor)
+            .map(d => d.Categoria)
+
+        const series = d3.stack()
+            .keys(d3.union(data.map(d => d["Sexo"]))) // distinct series keys, in input order
+                .value(([, D], key) => D.get(key).Valor) // get value for each series key and stack
+                (d3.index(data, d => d["Categoria"], d => d["Sexo"]));
+
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
+            .range([margin4.left, width4 - margin4.right]);
+
+        const y =  d3.scaleBand()
+            .domain(plotOrder)
+            .range([margin4.top, height4 - margin4.bottom])
+            .padding(0.08);
+
+        const color = d3.scaleOrdinal()
+            .domain(colOrder)
+            .range(["#C883E5", "#F9D94E"])
+            .unknown("#ccc");
+
+
+        const g = svg.selectAll("g")
+            .data(series)
+            .join("g")
+
+        g.selectAll('.text-legend')
+            .data(plotOrder)
+            .join("text")
+                .attr("class", "text-legend")
+                .attr("x", 10)
+                .attr("y", d => y(d) + y.bandwidth()/2 + 12)
+                .text(d => d)
+
+        g.selectAll("rect")
+            .data(D => D.map(d => (d.key = D.key, d)))
+            .join("rect")
+                .attr("x", d => x(d[0]))
+                .attr("y", d => y(d.data[0]))
+                .attr("height", y.bandwidth())
+                .attr("width", d => x(d[1]) - x(d[0]))
+                .attr("fill", d => color(d.key))
+
+        g.selectAll(".text-label")
+            .data(D => D.map(d => (d.key = D.key, d)))
+            .join("text")
+                .attr("class", "text-label")
+                .style("text-anchor", d => d[1] - d[0] > 15 ? "end" : "begin")
+                .attr("x", d => d[1] - d[0] > 15 ? x(d[1]) - 10 : x(d[0]))
+                .attr("y", d => y(d.data[0]) + y.bandwidth()/2 + 12)
+                .text(d => d[1] - d[0] > 2 ? `${d[1] - d[0]}%` : "")
+
+
+    }
+
+    updatePlot4(data4, svg4)
 
 })
