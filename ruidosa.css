@@ -210,6 +210,15 @@ body {
     width: 877px;
 }
 
+.download {
+    width: 100%;
+    text-align: center;
+}
+
+.download .dropdown {
+    width: 300px;
+}
+
 .credits {
     text-align: center;
 }
