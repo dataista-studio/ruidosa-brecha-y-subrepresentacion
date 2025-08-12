@@ -320,9 +320,10 @@ Promise.all([
 
         const sortedData = data.sort((a,b) => b.Mujer - a.Mujer);
         const cargos = sortedData.map(d => d['Cargos sistematizado']);
+        const maxValue = d3.max(sortedData, d => d.Mujer);
 
         const x = d3.scaleLinear()
-            .domain([0, d3.max(sortedData, d => d.Mujer)])
+            .domain([0, maxValue])
             .range([margin5.left, width4 - margin5.right]);
 
         const y =  d3.scaleBand()
@@ -343,14 +344,16 @@ Promise.all([
                 .attr("y", d => y(d) + y.bandwidth()/2 + 12)
                 .text(d => d)
 
-        g.selectAll("rect")
+        d3.select("#toma-de-decisiones")
+            .selectAll(".toma-rect")
             .data(sortedData)
-            .join("rect")
-                .attr("x", d => x(0))
-                .attr("y", d => y(d['Cargos sistematizado']))
-                .attr("height", y.bandwidth())
-                .attr("width", d => x(d.Mujer) - x(0))
-                .attr("fill", "#C883E5")
+            .join("div")
+                .attr("class", "toma-rect")
+                .style("left", d => `${x(0)}px`)
+                .style("top", d => `${y(d['Cargos sistematizado'])}px`)
+                .style("height", `${y.bandwidth()}px`)
+                .style("width", d => `${x(d.Mujer) - x(0)}px`)
+                .style("background-color", "#C883E5")
 
         d3.select("#toma-de-decisiones")
             .selectAll(".toma-label")

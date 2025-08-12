@@ -376,3 +376,12 @@ body {
     background-color: #C883E5;
   }
 
+  .toma-rect {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("../images/viz5/cable.png");
+  }
+
+
+
