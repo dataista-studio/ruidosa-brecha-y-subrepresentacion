@@ -213,10 +213,15 @@ body {
 .download {
     width: 100%;
     text-align: center;
+    
 }
 
 .download .dropdown {
-    width: 300px;
+    width: 490px;
+}
+
+.download .dropbtn {
+    font-size: 28px;
 }
 
 .credits {
