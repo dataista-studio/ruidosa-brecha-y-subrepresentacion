@@ -210,9 +210,27 @@ body {
     width: 877px;
 }
 
+.credits {
+    text-align: center;
+}
+
+.credits p {
+    line-height: 20px;
+    margin: 0;
+}
+
+.credit {
+    font-weight: 700;
+    margin-right: 6px;
+}
+
 .footer {
     text-align: center;
     padding: 20px 0;
+}
+
+.footer-text {
+    margin: 0 14px;
 }
 
 .footer img {
