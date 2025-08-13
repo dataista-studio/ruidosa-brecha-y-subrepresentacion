@@ -233,6 +233,7 @@ body {
 
 .download .dropdown {
     width: 490px;
+    max-width: 100%;
 }
 
 .download .dropbtn {
@@ -265,7 +266,6 @@ body {
 
 .footer img {
     vertical-align: middle;
-    margin-left: 8px;
 }
 
 /* DROPDOWN */
@@ -528,3 +528,104 @@ body {
     display: inline-block;
     width: 500px;
   }
+
+@media (max-width: 932px) {
+  .quote {
+    width: 98vw;
+    background-image: none;
+  }
+
+  .right .quote-text {
+    width: 50vw;
+    left: 45vw;
+    top: 0;
+  }
+
+  .quote1::before,
+  .quote3::before {
+    left: 0;
+    top: 0;
+    width: 50vw;
+    height: 44.6vw;
+    background-size: 50vw 44.6vw;
+  }
+
+  .left .quote-text {
+    width: 50vw;
+    left: 0;
+    top: 0;
+  }
+
+  .quote2::after {
+    right: 0;
+    top: 0;
+    width: 50vw;
+    height: 44.6vw;
+    background-size: 50vw 44.6vw;
+  }
+
+  .microphones,
+  .chairs {
+    width: 98vw;
+    background-size: 100% auto;
+  }
+
+  .microphones {
+    height: 22vw;
+  }
+
+  .chairs {
+    height: 26.8vw;
+  }
+
+  .infographic-text {
+    max-width: 60%;
+  }
+
+  .section img,
+  .call-action img {
+    max-width: 98vw;
+    height: auto;
+  }
+
+  .bandas-colores img {
+    width: 98vw;
+    height: 36.5vw;
+  }
+
+  .bubbles {
+    height: auto;
+  }
+
+  .bubble {
+    position: relative;
+    display: block;
+    width: 98vw;
+    height: auto;
+    color: #FFF !important;
+    border-radius: none;
+    top: 0;
+    left: 0;
+  }
+
+  .bubble.purple,
+  .bubble.pink,
+  .bubble.yellow,
+  .bubble.green,
+  .bubble.orange {
+    background-color: #282828;
+  }
+
+  .download .dropbtn {
+    font-size: 21px;
+  }
+
+  .footer-text {
+    margin: 0 4px;
+  }
+
+  .footer img {
+    height: 5vw;
+    max-height: 57px;
+  }
+}
