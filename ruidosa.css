@@ -628,4 +628,32 @@ body {
     height: 5vw;
     max-height: 57px;
   }
+
+  .circles {
+    display: block;
+  }
+
+  .left-col,
+  .right-col {
+    display: block;
+    position: none;
+    width: 98vw;
+    max-width: 98vw;
+  }
+
+  .festivales,
+  .companias {
+    display: inline-block;
+    width: 45%
+  }
+
+  #festivales-circulo {
+    margin-left: 10px;
+    margin-top: 20px;
+  }
+
+  #companias-circulo {
+    margin-left: 40px;
+    margin-top: 20px;
+  }
 }
