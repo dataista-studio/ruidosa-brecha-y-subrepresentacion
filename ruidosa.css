@@ -582,6 +582,12 @@ body {
     max-width: 60%;
   }
 
+  .section {
+    margin-top: 30px;
+    margin-bottom: 12px;
+    height: auto;
+  }
+
   .section img,
   .call-action img {
     max-width: 98vw;
