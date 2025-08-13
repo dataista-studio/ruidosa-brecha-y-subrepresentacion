@@ -109,7 +109,7 @@ Promise.all([
             .data(plotOrder)
             .join("div")
                 .attr("class", "legend")
-                .style("background-image", d => `url("../images/viz1/${d} - background.png")`)
+                .style("background-image", d => `url("images/viz1/${d} - background.png")`)
                 .html(d => {
                     const datum = filteredData.find(dat => dat["tipo banda"] === d);
                     return `${datum[state.anios]}% ${d}`
