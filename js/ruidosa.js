@@ -489,13 +489,13 @@ Promise.all([
 
     updatePlot5(data5, svg5);
 
+    updateHeight();
 })
 
 function updateHeight() {
     const h = d3.select(".wrapper").node().getBoundingClientRect().height;
   
     d3.select("body").style("height", h + "px");
-    console.log('here')
   
     pymChild.sendHeight();
 }
