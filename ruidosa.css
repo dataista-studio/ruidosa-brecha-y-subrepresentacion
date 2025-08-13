@@ -264,7 +264,7 @@ body {
     width: auto;
     background-color: #FFF;
     /* background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='28' viewBox='0 0 28 28' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>"); */
-    background-image: url("../images/icons/chevron-down.svg");
+    background-image: url("images/icons/chevron-down.svg");
     background-repeat: no-repeat;
     background-position-x: calc(100% - 18px);
     background-position-y: 50%;
