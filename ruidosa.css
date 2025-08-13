@@ -28,6 +28,11 @@ body {
     margin: 0 auto;
 }
 
+.section {
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+
 .purple, .orange {
     font-weight: 700;
     font-style: bold;
@@ -172,6 +177,14 @@ body {
     display: inline-block;
 }
 
+#festivales-circulo {
+  margin: 40px 0 20px 140px;
+}
+
+#companias-circulo {
+  margin-left: 20px;
+}
+
 .title2 {
     height: 133px;
     width: 808px;
@@ -208,12 +221,14 @@ body {
 
 .call-action {
     width: 877px;
+    margin-top: 80px !important;
+    margin-bottom: 20px !important;
 }
 
 .download {
     width: 100%;
     text-align: center;
-    
+    margin: 80px 0 40px 0;
 }
 
 .download .dropdown {
@@ -226,6 +241,7 @@ body {
 
 .credits {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .credits p {
