@@ -3,13 +3,14 @@ const pymChild = new pym.Child({});
 const state = {
     artista: "Todos los artistas",
     anios: "Todos los años",
-    anios2: "Todos los años"
+    anios2: "Todos los años",
+    anios3: "2024"
 }
 
 Promise.all([
     d3.csv('datos/arriba del escenario.csv'),
     d3.csv('datos/disparidad geografica.csv'),
-    d3.csv('datos/disparidad geografica.csv'),
+    d3.csv('datos/brecha paises.csv'),
     d3.csv('datos/detras del escenario.csv'),
     d3.csv('datos/toma de decisiones.csv')
 ]).then(function (ruidosa) {
@@ -27,6 +28,15 @@ Promise.all([
     const numberCols2 = data2.columns.filter(col => !stringCols2.includes(col));
     data2.forEach(datum => {
         numberCols2.forEach(col => {
+            datum[col] = +datum[col];
+        })
+    });
+
+    const data3 = ruidosa[2];
+    const stringCols3 = ["tipo banda", "pais"]
+    const numberCols3 = data3.columns.filter(col => !stringCols3.includes(col));
+    data3.forEach(datum => {
+        numberCols3.forEach(col => {
             datum[col] = +datum[col];
         })
     });
@@ -215,6 +225,116 @@ Promise.all([
 
     updatePlot2(data2, state, svg2, "anios2")
     addDropdown("anio2", numberCols2, "anios2", updatePlot2, svg2, data2);
+
+    /* VIZ 2 */
+
+    const width3 = 800;
+    const height3 = 390;
+    const margin3 = {
+        top: 10, bottom: 10, left: 330, right: 10
+    };
+
+    const svg3 = d3.select("#brecha-paises")
+        .append("svg")
+        .attr("width", width3)
+        .attr("height", height3)
+        .attr("viewBox", `0 0 ${width3} ${height3}`);
+
+    const updatePlot3 = (data, state, svg, label) => {
+        const plotOrder = Array.from(new Set(data.map(d => d.pais)));
+        const bands = ["Solista mujer", "Bandas de mujeres", "Bandas mixtas",
+            "Bandas de hombres", "Solista hombre", "Solista no binarie"];
+
+        const bandColors = {
+            "Bandas de mujeres": ["#C883E5", "#9568F4"],
+            "Solista mujer": ["#C883E5", "#C883E5"],
+            "Bandas mixtas": ["#EA9F67", "#9568F4"],
+            "Bandas de hombres": ["#F9D94E", "#EA9F67"],
+            "Solista hombre": ["#F9D94E", "#F9D94E"],
+            "Solista no binarie": ["#E2F44F", "#E2F44F"]
+        }
+
+        console.log(d3.union(data.map(d => d["tipo banda"])))
+
+        const series = d3.stack()
+            .keys(d3.union(data.map(d => d["tipo banda"]))) // distinct series keys, in input order
+            .value(([, D], key) => D.get(key)[state[label]]) // get value for each series key and stack
+                (d3.index(data, d => d["pais"], d => d["tipo banda"]));
+
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
+            .range([margin3.left, width3 - margin3.right]);
+
+        const y =  d3.scaleBand()
+            .domain(plotOrder)
+            .range([margin3.top, height3 - margin3.bottom])
+            .padding(0.08);
+
+        const defs = svg.selectAll("defs")
+            .data([bands])
+            .join("defs");
+
+        const patterns = defs.selectAll("pattern")
+            .data(d => d)
+            .join("pattern")
+                .attr("id", d => d.replaceAll(" ", "").toLowerCase())
+                .attr("width", "5")
+                .attr("height", "5")
+                .attr("patternUnits", "userSpaceOnUse");
+
+        patterns.selectAll("rect")
+            .data(d => [d])
+            .join("rect")
+                .attr("width", "100%")
+                .attr("height", "100%")
+                .attr("stroke", "none")
+                .attr("fill", d => bandColors[d][0])
+
+        patterns.selectAll("path")
+            .data(d => [d])
+            .join("path")
+                .attr("fill", "none")
+                .attr("stroke", d => bandColors[d][1])
+                .attr("stroke-width", "3")
+                .attr("d", "M0 2.5h5z")
+            
+        const g = svg.selectAll("g")
+            .data(series)
+            .join("g")
+
+        // g.selectAll('.text-legend')
+        //     .data(plotOrder)
+        //     .join("text")
+        //         .attr("class", "text-legend")
+        //         .attr("x", 10)
+        //         .attr("y", d => y(d) + y.bandwidth()/2 + 12)
+        //         .text(d => d)
+
+        g.selectAll("rect")
+            .data(D => D.map(d => (d.key = D.key, d)))
+            .join("rect")
+                .attr("x", d => x(d[0]))
+                .attr("y", d => y(d.data[0]))
+                .attr("height", y.bandwidth())
+                .attr("width", d => x(d[1]) - x(d[0]))
+                .attr("fill", d => `url(#${d.key.replaceAll(" ", "").toLowerCase()})`)
+                .attr("stroke", "none")
+
+        // g.selectAll(".text-label")
+        //     .data(D => D.map(d => (d.key = D.key, d)))
+        //     .join("text")
+        //         .attr("class", "text-label")
+        //         .style("text-anchor", "end")
+        //         .attr("x", d => x(d[1]) - 10)
+        //         .attr("y", d => y(d.data[0]) + y.bandwidth()/2 + 12)
+        //         .text(d => d[1] - d[0] > 2 ? `${d[1] - d[0]}%` : "")
+
+
+    }
+
+    updatePlot3(data3, state, svg3, "anios3")
+    addDropdown("anio3", numberCols3, "anios3", updatePlot3, svg3, data3);
+
 
     /* VIZ 4 */
 
