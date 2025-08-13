@@ -1,3 +1,5 @@
+const pymChild = new pym.Child({});
+
 const state = {
     artista: "Todos los artistas",
     anios: "Todos los años",
@@ -367,4 +369,17 @@ Promise.all([
 
     updatePlot5(data5, svg5);
 
+})
+
+function updateHeight() {
+    const h = d3.select(".wrapper").node().getBoundingClientRect().height;
+  
+    d3.select("body").style("height", h + "px");
+    console.log('here')
+  
+    pymChild.sendHeight();
+}
+
+window.addEventListener("resize", (event) => {
+    updateHeight();
 })
