@@ -513,3 +513,18 @@ body {
   .yellow {
     background-color: #F9D94E;
   }
+
+  .arriba-del-escenario-wrapper {
+    display: inline-flex;
+  }
+
+  #arriba-del-escenario-legend {
+    display: inline-block;
+    width: 400px;
+    margin-top: 30px;
+  }
+
+  #arriba-del-escenario {
+    display: inline-block;
+    width: 500px;
+  }
