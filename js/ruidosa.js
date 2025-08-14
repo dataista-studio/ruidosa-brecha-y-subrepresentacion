@@ -3,6 +3,7 @@ const pymChild = new pym.Child({});
 const state = {
     artista: "Todos los artistas",
     anios: "Todos los años",
+    artista2: "Todos los artistas",
     anios2: "Todos los años",
     anios3: "2024"
 }
@@ -24,7 +25,7 @@ Promise.all([
     });
 
     const data2 = ruidosa[1];
-    const stringCols2 = ["tipo banda", "tipo show"]
+    const stringCols2 = ["tipo banda", "tipo show", "artistas"]
     const numberCols2 = data2.columns.filter(col => !stringCols2.includes(col));
     data2.forEach(datum => {
         numberCols2.forEach(col => {
@@ -52,6 +53,7 @@ Promise.all([
     });
 
     const artistas1 = Array.from(new Set(data1.map(d => d['artistas'])));
+    const artistas2 = Array.from(new Set(data2.map(d => d['artistas'])));
 
     const width = 800;
     const height = 500;
@@ -140,7 +142,7 @@ Promise.all([
             });
         updateDropdownHtml(`#dropdown-${id}`, state[label]);
         opts.selectAll("a").on("click", function(event, d){
-            if (d !== state.artista) {
+            if (d !== state[label]) {
                 state[label] = d;
                 updateDropdownHtml(`#dropdown-${id}`, state[label]);
                 updatePlot(data, state, svg, label);
@@ -170,10 +172,12 @@ Promise.all([
     const updatePlot2 = (data, state, svg, label) => {
         const colOrder = ["Norte Global", "Latinoamericanos", "Otro"];
 
+        const filteredData = data.filter(d => d.artistas === state.artista2);
+
         const series = d3.stack()
-            .keys(d3.union(data.map(d => d["tipo show"]))) // distinct series keys, in input order
-                .value(([, D], key) => D.get(key)[state[label]]) // get value for each series key and stack
-                (d3.index(data, d => d["tipo banda"], d => d["tipo show"]));
+            .keys(d3.union(filteredData.map(d => d["tipo show"]))) // distinct series keys, in input order
+            .value(([, D], key) => D.get(key)[state.anios2]) // get value for each series key and stack
+                (d3.index(filteredData, d => d["tipo banda"], d => d["tipo show"]));
 
         const x = d3.scaleLinear()
             .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
@@ -188,7 +192,6 @@ Promise.all([
             .domain(colOrder)
             .range(["#E2F44F", "#9568F4", "#FFF"])
             .unknown("#ccc");
-
 
         const g = svg.selectAll("g")
             .data(series)
@@ -218,15 +221,16 @@ Promise.all([
                 .style("text-anchor", "end")
                 .attr("x", d => x(d[1]) - 10)
                 .attr("y", d => y(d.data[0]) + y.bandwidth()/2 + 12)
-                .text(d => d[1] - d[0] > 2 ? `${d[1] - d[0]}%` : "")
+                .text(d => d[1] - d[0] > 10 ? `${d[1] - d[0]}%` : "")
 
 
     }
 
     updatePlot2(data2, state, svg2, "anios2")
+    addDropdown("artist2", artistas2, "artista2", updatePlot2, svg2, data2);
     addDropdown("anio2", numberCols2, "anios2", updatePlot2, svg2, data2);
 
-    /* VIZ 2 */
+    /* VIZ 3 */
 
     const width3 = 800;
     const height3 = 390;
@@ -253,8 +257,6 @@ Promise.all([
             "Solista hombre": ["#F9D94E", "#F9D94E"],
             "Solista no binarie": ["#E2F44F", "#E2F44F"]
         }
-
-        console.log(d3.union(data.map(d => d["tipo banda"])))
 
         const series = d3.stack()
             .keys(d3.union(data.map(d => d["tipo banda"]))) // distinct series keys, in input order
