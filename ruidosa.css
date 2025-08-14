@@ -737,6 +737,14 @@ body {
     margin-bottom: 4px;
   }
 
+  .disparidad-legend-item {
+    width: 110px;
+  }
+
+  .text-legend {
+    font-size: 24px;
+  }
+
   #mobile {
     display: block;
     width: 100vw;

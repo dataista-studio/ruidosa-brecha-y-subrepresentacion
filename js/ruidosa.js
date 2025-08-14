@@ -167,11 +167,12 @@ Promise.all([
 
     /* VIZ 2 */
 
-    const width2 = 800;
+    const width2 = IS_MOBILE() ? windowWidth : 800;
     const height2 = 390;
     const margin2 = {
-        top: 10, bottom: 10, left: 330, right: 10
+        top: 10, bottom: 10, left: IS_MOBILE() ? 0 : 330, right: IS_MOBILE() ? 20 : 10
     };
+    const padding2 = IS_MOBILE() ? 0.4 : 0.08;
 
     const svg2 = d3.select("#disparidad-geografica")
         .append("svg")
@@ -196,7 +197,7 @@ Promise.all([
         const y =  d3.scaleBand()
             .domain(plotOrder)
             .range([margin2.top, height2 - margin2.bottom])
-            .padding(0.08);
+            .padding(padding2);
 
         const color = d3.scaleOrdinal()
             .domain(colOrder)
@@ -211,8 +212,8 @@ Promise.all([
             .data(plotOrder)
             .join("text")
                 .attr("class", "text-legend")
-                .attr("x", 10)
-                .attr("y", d => y(d) + y.bandwidth()/2 + 12)
+                .attr("x", IS_MOBILE() ? 0 : 10)
+                .attr("y", d => IS_MOBILE() ? y(d) - 4: y(d) + y.bandwidth()/2 + 12)
                 .text(d => d)
 
         g.selectAll("rect")
