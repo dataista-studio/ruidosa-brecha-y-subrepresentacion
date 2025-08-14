@@ -494,11 +494,12 @@ Promise.all([
 
     /* VIZ 5 */
 
-    const width5 = 800;
-    const height5 = 390;
+    const width5 = IS_MOBILE() ? windowWidth : 800;
+    const height5 = IS_MOBILE() ? 500 : 390;
     const margin5 = {
-        top: 50, bottom: 10, left: 440, right: 60
+        top: IS_MOBILE() ? 0 : 50, bottom: 10, left: IS_MOBILE() ? 0: 440, right: IS_MOBILE() ? 100 : 60
     };
+    const padding5 =  IS_MOBILE() ? 0.5 : 0.4;
 
     const svg5 = d3.select("#toma-de-decisiones")
         .append("svg")
@@ -519,7 +520,7 @@ Promise.all([
         const y =  d3.scaleBand()
             .domain(cargos)
             .range([margin5.top, height4 - margin5.bottom])
-            .padding(0.4);
+            .padding(padding5);
 
         const g = svg.selectAll("g")
             .data(sortedData)
@@ -529,9 +530,9 @@ Promise.all([
             .data(cargos)
             .join("text")
                 .attr("class", "toma-legend")
-                .style("text-anchor", "end")
-                .attr("x", x(0) - 10)
-                .attr("y", d => y(d) + y.bandwidth()/2 + 12)
+                .style("text-anchor", IS_MOBILE() ? "begin" : "end")
+                .attr("x", IS_MOBILE() ? x(0) : x(0) - 10)
+                .attr("y", d => IS_MOBILE() ? y(d) - 4 : y(d) + y.bandwidth()/2 + 12)
                 .text(d => d)
 
         d3.select("#toma-de-decisiones")

@@ -742,7 +742,11 @@ body {
   }
 
   .text-legend {
-    font-size: 24px;
+    font-size: 18px;
+  }
+
+  .toma-legend {
+    font-size: 18px;
   }
 
   #mobile {
