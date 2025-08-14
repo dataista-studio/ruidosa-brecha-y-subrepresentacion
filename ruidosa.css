@@ -390,6 +390,11 @@ body {
     font-style: italic;
   }
 
+  .hovered-country {
+    font-style: normal;
+    font-weight: 700;
+  }
+
   #detras-del-escenario-legend,
   #toma-de-decisiones {
     position: relative;
@@ -521,17 +526,20 @@ body {
     background-color: #F9D94E;
   }
 
-  .arriba-del-escenario-wrapper {
+  .arriba-del-escenario-wrapper,
+  .brecha-paises-wrapper {
     display: inline-flex;
   }
 
-  #arriba-del-escenario-legend {
+  #arriba-del-escenario-legend,
+  #brecha-paises-legend {
     display: inline-block;
     width: 400px;
     margin-top: 30px;
   }
 
-  #arriba-del-escenario {
+  #arriba-del-escenario,
+  #brecha-paises {
     display: inline-block;
     width: 500px;
   }

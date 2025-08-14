@@ -5,6 +5,7 @@ const state = {
     anios: "Todos los años",
     artista2: "Todos los artistas",
     anios2: "Todos los años",
+    hovered3: 'Argentina',
     anios3: "2024"
 }
 
@@ -67,8 +68,6 @@ Promise.all([
         .attr("height", height)
         .attr("viewBox", `0 0 ${width} ${height}`);
 
-    const legend = d3.select("#arriba-del-escenario-legend");
-
     const plotOrder = ["Bandas de mujeres", "Solista mujer", "Bandas mixtas",
         "Bandas de hombres", "Solista hombre", "Solista no binarie"
     ];
@@ -119,7 +118,8 @@ Promise.all([
                 .attr("height", circleSize)
                 .attr("xlink:href", d => `images/viz1/${d.img}`);
 
-        const legends = legend.selectAll('.legend')
+        d3.select("#arriba-del-escenario-legend")
+            .selectAll('.legend')
             .data(plotOrder)
             .join("div")
                 .attr("class", "legend")
@@ -232,10 +232,10 @@ Promise.all([
 
     /* VIZ 3 */
 
-    const width3 = 800;
+    const width3 = 500;
     const height3 = 500;
     const margin3 = {
-        top: 10, bottom: 10, left: 330, right: 10
+        top: 10, bottom: 10, left: 10, right: 10
     };
 
     const svg3 = d3.select("#brecha-paises")
@@ -243,6 +243,7 @@ Promise.all([
         .attr("width", width3)
         .attr("height", height3)
         .attr("viewBox", `0 0 ${width3} ${height3}`);
+
 
     const updatePlot3 = (data, state, svg, label) => {
         const plotOrder = Array.from(new Set(data.map(d => d.pais)));
@@ -256,6 +257,31 @@ Promise.all([
             "Bandas de hombres": ["#F9D94E", "#EA9F67"],
             "Solista hombre": ["#F9D94E", "#F9D94E"],
             "Solista no binarie": ["#E2F44F", "#E2F44F"]
+        }
+
+        const updateLabels = (g) => {
+            d3.select("#brecha-paises-legend")
+                .selectAll('.legend')
+                .data(bands)
+                .join("div")
+                    .attr("class", "legend")
+                    .style("background-image", d => `url("images/viz1/${d} - background.png")`)
+                    .html(d => {
+                        const datum = data3.find(
+                            dat => (dat["tipo banda"] === d && dat.pais === state.hovered3)
+                        );
+                        return `${datum[state.anios3]}% ${d}`
+                    })
+
+            g.selectAll(".country-label")
+                .data(plotOrder)
+                .join("text")
+                    .attr("class", d => 
+                        `country-label ${state.hovered3 === d ? 'hovered-country' : ''}`
+                    )
+                    .attr("x", x(0))
+                    .attr("y", d => y(d) - 8)
+                    .text(d => d)
         }
 
         const series = d3.stack()
@@ -312,13 +338,7 @@ Promise.all([
         //         .attr("y", d => y(d) + y.bandwidth()/2 + 12)
         //         .text(d => d)
 
-        g.selectAll(".country-label")
-            .data(plotOrder)
-            .join("text")
-                .attr("class", "country-label")
-                .attr("x", x(0))
-                .attr("y", d => y(d) - 8)
-                .text(d => d)
+        
 
         g.selectAll(".big-rect")
             .data(D => D.map(d => (d.key = D.key, d)))
@@ -330,6 +350,10 @@ Promise.all([
                 .attr("width", d => x(d[1]) - x(d[0]))
                 .attr("fill", d => `url(#${d.key.replaceAll(" ", "").toLowerCase()})`)
                 .attr("stroke", "none")
+                .on("mousemove", (evt, d) => {
+                    state.hovered3 = d.data[0];
+                    updateLabels(g);
+                })
 
         g.selectAll(".small-rect")
             .data(plotOrder.flatMap(key => {
@@ -349,7 +373,9 @@ Promise.all([
                 .attr("fill", "none")
                 .attr("stroke", "black")
                 .attr("stroke-width", "0.1px")
+                
 
+        updateLabels(g);
         // g.selectAll(".text-label")
         //     .data(D => D.map(d => (d.key = D.key, d)))
         //     .join("text")
