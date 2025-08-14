@@ -310,15 +310,35 @@ Promise.all([
         //         .attr("y", d => y(d) + y.bandwidth()/2 + 12)
         //         .text(d => d)
 
-        g.selectAll("rect")
+        g.selectAll(".big-rect")
             .data(D => D.map(d => (d.key = D.key, d)))
-            .join("rect")
+            .join("rect")   
+                .attr("class", "big-rect")
                 .attr("x", d => x(d[0]))
                 .attr("y", d => y(d.data[0]))
                 .attr("height", y.bandwidth())
                 .attr("width", d => x(d[1]) - x(d[0]))
                 .attr("fill", d => `url(#${d.key.replaceAll(" ", "").toLowerCase()})`)
                 .attr("stroke", "none")
+
+        g.selectAll(".small-rect")
+            .data(plotOrder.flatMap(key => {
+                return d3.range(0, 100).map(num => {
+                    return {
+                        key: key,
+                        value: num
+                    }
+                })
+            })) 
+            .join("rect")   
+                .attr("class", "small-rect")
+                .attr("x", d => x(d.value))
+                .attr("y", d => y(d.key))
+                .attr("height", y.bandwidth())
+                .attr("width", d => x(d.value + 1) - x(d.value))
+                .attr("fill", "none")
+                .attr("stroke", "black")
+                .attr("stroke-width", "0.1px")
 
         // g.selectAll(".text-label")
         //     .data(D => D.map(d => (d.key = D.key, d)))
@@ -418,8 +438,6 @@ Promise.all([
                 .style("left", d => `${x(d[0][1]) - 80}px`)
                 .style("top", d => "12px")
                 .html(d => d[0].key === 'Mujer' ? 'mujeres' : 'hombres')
-
-
     }
 
     updatePlot4(data4, svg4);
