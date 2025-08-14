@@ -243,7 +243,7 @@ Promise.all([
 
     /* VIZ 3 */
 
-    const width3 = 500;
+    const width3 = IS_MOBILE() ? windowWidth : 500;
     const height3 = 500;
     const margin3 = {
         top: 10, bottom: 10, left: 10, right: 10
