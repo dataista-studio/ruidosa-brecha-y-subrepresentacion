@@ -540,7 +540,7 @@ Promise.all([
             .data(sortedData)
             .join("div")
                 .attr("class", "toma-rect")
-                .style("left", d => `${x(0)}px`)
+                .style("left", `${x(0)}px`)
                 .style("top", d => `${y(d['Cargos sistematizado'])}px`)
                 .style("height", `${y.bandwidth()}px`)
                 .style("width", d => `${x(d.Mujer) - x(0)}px`)
