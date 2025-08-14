@@ -407,11 +407,12 @@ Promise.all([
 
     /* VIZ 4 */
 
-    const width4 = 800;
-    const height4 = 390;
+    const width4 = IS_MOBILE() ? windowWidth : 800;
+    const height4 = IS_MOBILE() ? 500 : 390;
     const margin4 = {
-        top: 50, bottom: 10, left: 330, right: 10
+        top: 50, bottom: 10, left: IS_MOBILE() ? 0 : 330, right: 10
     };
+    const padding4 = IS_MOBILE() ? 0.4 : 0.08;
 
     const svg4 = d3.select("#detras-del-escenario")
         .append("svg")
@@ -437,7 +438,7 @@ Promise.all([
         const y =  d3.scaleBand()
             .domain(plotOrder)
             .range([margin4.top, height4 - margin4.bottom])
-            .padding(0.08);
+            .padding(padding4);
 
         const color = d3.scaleOrdinal()
             .domain(colOrder)
@@ -453,8 +454,8 @@ Promise.all([
             .data(plotOrder)
             .join("text")
                 .attr("class", "text-legend")
-                .attr("x", 10)
-                .attr("y", d => y(d) + y.bandwidth()/2 + 12)
+                .attr("x", IS_MOBILE() ? 0 : 10)
+                .attr("y", d => IS_MOBILE() ? y(d) - 4 : y(d) + y.bandwidth()/2 + 12)
                 .text(d => d)
 
         g.selectAll("rect")
