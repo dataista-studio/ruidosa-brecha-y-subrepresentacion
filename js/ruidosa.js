@@ -557,3 +557,37 @@ function updateHeight() {
 window.addEventListener("resize", (event) => {
     updateHeight();
 })
+
+window.onclick = function (event) {
+    if (!event.target.matches("#dropbtn-artist")) {
+      var dropdown = document.getElementById("content-artist");
+      if (dropdown.classList.contains("show")) {
+        dropdown.classList.remove("show");
+      }
+    }
+    if (!event.target.matches("#dropbtn-anio")) {
+        var dropdown = document.getElementById("content-anio");
+        if (dropdown.classList.contains("show")) {
+            dropdown.classList.remove("show");
+        }
+    }
+    if (!event.target.matches("#dropbtn-artist2")) {
+        var dropdown = document.getElementById("content-artist2");
+        if (dropdown.classList.contains("show")) {
+          dropdown.classList.remove("show");
+        }
+    }
+    if (!event.target.matches("#dropbtn-anio2")) {
+        var dropdown = document.getElementById("content-anio2");
+        if (dropdown.classList.contains("show")) {
+            dropdown.classList.remove("show");
+        }
+    }
+    if (!event.target.matches("#dropbtn-anio3")) {
+        var dropdown = document.getElementById("content-anio3");
+        if (dropdown.classList.contains("show")) {
+            dropdown.classList.remove("show");
+        }
+    }
+    
+  };

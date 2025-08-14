@@ -33,6 +33,10 @@ body {
   margin-bottom: 20px;
 }
 
+.dropdowns {
+  text-align: center;
+}
+
 .purple, .orange {
     font-weight: 700;
     font-style: bold;
@@ -300,6 +304,7 @@ body {
     font-style: italic;
     color: #282828;
     font-weight: 500;
+    text-align: left;
   }
   
   /* Dropdown Content (Hidden by Default) */
