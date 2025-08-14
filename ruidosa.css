@@ -552,8 +552,28 @@ body {
   }
 
 @media (max-width: 932px) {
-  .body {
+  body {
     font-size: 14px;
+    line-height: 24px;
+  }
+
+  .quote-text {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .text-width {
+    line-height: 24px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 42px;
+  }
+
+  .purple,
+  .orange {
+    line-height: 42px;
   }
 
   .quote {
@@ -687,5 +707,10 @@ body {
   #companias-circulo {
     margin-left: 10px;
     margin-top: 20px;
+  }
+
+  .arriba-del-escenario-wrapper,
+  .brecha-paises-wrapper {
+    flex-direction: column;
   }
 }
