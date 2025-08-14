@@ -1,5 +1,11 @@
 const pymChild = new pym.Child({});
 
+function IS_MOBILE() {
+    return d3.select("#mobile").style("display") === "block";
+}
+
+const windowWidth = IS_MOBILE() ? d3.select("#mobile").node().getBoundingClientRect().width : 0;
+
 const state = {
     artista: "Todos los artistas",
     anios: "Todos los años",
@@ -56,8 +62,11 @@ Promise.all([
     const artistas1 = Array.from(new Set(data1.map(d => d['artistas'])));
     const artistas2 = Array.from(new Set(data2.map(d => d['artistas'])));
 
+    const nRows = 10;
+    const circleSize = IS_MOBILE() ? windowWidth / 12 :  46;
+
     const width = 800;
-    const height = 500;
+    const height = circleSize * 11;
     const margin = {
         top: 10, bottom: 10, left: 10, right: 10
     };
@@ -76,8 +85,7 @@ Promise.all([
         return data.filter(d => d.artistas === state.artista);
     }
 
-    const nRows = 10;
-    const circleSize = 46;
+    
 
     const getDataToPlot1 = (filteredData, state) => {
         
@@ -123,7 +131,9 @@ Promise.all([
             .data(plotOrder)
             .join("div")
                 .attr("class", "legend")
-                .style("background-image", d => `url("images/viz1/${d} - background.png")`)
+                .style("background-image", 
+                    d =>`url("images/viz1/${d} - background${IS_MOBILE() ? ' mobile' : ''}.png")`
+                )
                 .html(d => {
                     const datum = filteredData.find(dat => dat["tipo banda"] === d);
                     return `${datum[state.anios]}% ${d}`
@@ -265,7 +275,9 @@ Promise.all([
                 .data(bands)
                 .join("div")
                     .attr("class", "legend")
-                    .style("background-image", d => `url("images/viz1/${d} - background.png")`)
+                    .style("background-image", 
+                        d => `url("images/viz1/${d} - background${IS_MOBILE() ? ' mobile' : ''}.png")`
+                    )
                     .html(d => {
                         const datum = data3.find(
                             dat => (dat["tipo banda"] === d && dat.pais === state.hovered3)

@@ -542,6 +542,7 @@ body {
   #brecha-paises-legend {
     display: inline-block;
     width: 400px;
+    max-width: 98vw;
     margin-top: 30px;
   }
 
@@ -549,6 +550,10 @@ body {
   #brecha-paises {
     display: inline-block;
     width: 500px;
+  }
+
+  #mobile {
+    display: none;
   }
 
 @media (max-width: 932px) {
@@ -712,5 +717,28 @@ body {
   .arriba-del-escenario-wrapper,
   .brecha-paises-wrapper {
     flex-direction: column;
+  }
+
+  #arriba-del-escenario-legend,
+  #brecha-paises-legend {
+    margin-top: 10px;
+  }
+
+  .legend {
+    font-size: 14px;
+    line-height: 14px;
+    background-size: auto auto;
+    margin-bottom: 0 !important;
+    display: inline-block;
+    padding-right: 40px;
+  }
+
+  .dropdowns {
+    margin-bottom: 4px;
+  }
+
+  #mobile {
+    display: block;
+    width: 100vw;
   }
 }
