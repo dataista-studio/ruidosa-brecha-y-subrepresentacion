@@ -233,7 +233,7 @@ Promise.all([
     /* VIZ 3 */
 
     const width3 = 800;
-    const height3 = 390;
+    const height3 = 500;
     const margin3 = {
         top: 10, bottom: 10, left: 330, right: 10
     };
@@ -270,7 +270,7 @@ Promise.all([
         const y =  d3.scaleBand()
             .domain(plotOrder)
             .range([margin3.top, height3 - margin3.bottom])
-            .padding(0.08);
+            .padding(0.4);
 
         const defs = svg.selectAll("defs")
             .data([bands])
@@ -311,6 +311,14 @@ Promise.all([
         //         .attr("x", 10)
         //         .attr("y", d => y(d) + y.bandwidth()/2 + 12)
         //         .text(d => d)
+
+        g.selectAll(".country-label")
+            .data(plotOrder)
+            .join("text")
+                .attr("class", "country-label")
+                .attr("x", x(0))
+                .attr("y", d => y(d) - 8)
+                .text(d => d)
 
         g.selectAll(".big-rect")
             .data(D => D.map(d => (d.key = D.key, d)))
