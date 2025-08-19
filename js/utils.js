@@ -3,8 +3,8 @@ function addOptions(id, values, attrs) {
     element.selectAll("a")
         .data(values)
         .join("a")
-        .attr("value", (d,i) => attrs[i])
-        .html(d => d);
+        .attr("value", d => d)
+        .html((d, i) => attrs[i]);
 
     return element;
   }

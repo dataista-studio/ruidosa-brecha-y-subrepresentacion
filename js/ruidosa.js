@@ -17,32 +17,6 @@ const state = {
 
 let language = 'spanish';
 
-const updateText = (language) => {
-    const keys = Object.keys(text[language]);
-    keys.forEach(key => {
-        d3.select(`.${key}`)
-            .html(text[language][key])
-    });
-    d3.select(".section2")
-        .style("width", `${language === 'spanish' ? 808 : 472}px`);
-}
-
-const updateLanguageButtons = () => {
-    d3.select(".translation").selectAll("span")
-    .data(['spanish', 'english'])
-    .join('span')
-    .attr("class", d => d === language ? 'selected' : '')
-    .html(d => d === 'spanish' ? 'Versión en español' : 'English version')
-    .on('click', (_, d) => {
-        language = d;
-        updateText(language);
-        updateLanguageButtons();
-    });
-}
-
-updateLanguageButtons();
-updateText(language);
-
 Promise.all([
     d3.csv('datos/arriba del escenario.csv'),
     d3.csv('datos/disparidad geografica.csv'),
@@ -113,8 +87,6 @@ Promise.all([
         return data.filter(d => d.artistas === state.artista);
     }
 
-    
-
     const getDataToPlot1 = (filteredData, state) => {
         
         const outputData = [];
@@ -164,7 +136,7 @@ Promise.all([
                 )
                 .html(d => {
                     const datum = filteredData.find(dat => dat["tipo banda"] === d);
-                    return `${datum[state.anios]}% ${d}`
+                    return `${datum[state.anios]}% ${language === 'spanish' ? d : vizLabels[d]}`
                 })
     }
 
@@ -173,16 +145,25 @@ Promise.all([
     }
 
     const addDropdown = (id, options, label, updatePlot, svg, data) => {
-        let opts = addOptions(`content-${id}`, options, options);
+        const labels = language === 'spanish' ? options : options.map(d => vizLabels[d] || d);
+        let opts = addOptions(`content-${id}`, options, labels);
         d3.select(`#dropdown-${id}`)
             .on("click", function(d){
                 document.getElementById(`content-${id}`).classList.toggle("show");
             });
-        updateDropdownHtml(`#dropdown-${id}`, state[label]);
+        updateDropdownHtml(`#dropdown-${id}`, 
+            language === 'spanish' 
+            ? state[label] 
+            : (vizLabels[state[label]] || state[label])
+        );
         opts.selectAll("a").on("click", function(event, d){
             if (d !== state[label]) {
                 state[label] = d;
-                updateDropdownHtml(`#dropdown-${id}`, state[label]);
+                updateDropdownHtml(`#dropdown-${id}`, 
+                    language === 'spanish' 
+                    ? state[label] 
+                    : (vizLabels[state[label]] || state[label])
+                );
                 updatePlot(data, state, svg, label);
             }
         })
@@ -242,7 +223,7 @@ Promise.all([
                 .attr("class", "text-legend")
                 .attr("x", IS_MOBILE() ? 0 : 10)
                 .attr("y", d => IS_MOBILE() ? y(d) - 4: y(d) + y.bandwidth()/2 + 12)
-                .text(d => d)
+                .text(d => language === 'spanish' ? d : vizLabels[d])
 
         g.selectAll("rect")
             .data(D => D.map(d => (d.key = D.key, d)))
@@ -587,6 +568,46 @@ Promise.all([
     updatePlot5(data5, svg5);
 
     updateHeight();
+
+    const updateText = (language) => {
+        const keys = Object.keys(text[language]);
+        keys.forEach(key => {
+            d3.select(`.${key}`)
+                .html(text[language][key])
+        });
+        d3.select(".section2")
+            .style("width", `${language === 'spanish' ? 808 : 472}px`);
+    }
+
+    const updateViz = () => {
+        updatePlot1(data1, state, svg);
+        addDropdown("artist", artistas1, "artista", updatePlot1, svg, data1);
+        addDropdown("anio", numberCols1, "anios", updatePlot1, svg, data1);
+        updatePlot2(data2, state, svg2, "anios2");
+        addDropdown("artist2", artistas2, "artista2", updatePlot2, svg2, data2);
+        addDropdown("anio2", numberCols2, "anios2", updatePlot2, svg2, data2);
+        updatePlot3(data3, state, svg3, "anios3");
+        addDropdown("anio3", numberCols3, "anios3", updatePlot3, svg3, data3);
+        updatePlot4(data4, svg4);
+        updatePlot5(data5, svg5);
+    }
+    
+    const updateLanguageButtons = () => {
+        d3.select(".translation").selectAll("span")
+        .data(['spanish', 'english'])
+        .join('span')
+        .attr("class", d => d === language ? 'selected' : '')
+        .html(d => d === 'spanish' ? 'Versión en español' : 'English version')
+        .on('click', (_, d) => {
+            language = d;
+            updateText(language);
+            updateLanguageButtons();
+            updateViz();
+        });
+    }
+    
+    updateLanguageButtons();
+    updateText(language);
 })
 
 function updateHeight() {

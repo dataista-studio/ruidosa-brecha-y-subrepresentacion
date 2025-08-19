@@ -39,7 +39,10 @@ const text = {
         'reports': 'Descargar los reportes completos',
         'credits': '<p><span class="credit">Investigadoras:</span>Natalia Sánchez González, Daniela Paz Moyano Dávila</p><p><span class="credit">Ruidosa Project Manager:</span>Diego S. Porzio</p><p><span class="credit">Colaboradoras y consultoras:</span></p><p>Criteria Entertainment — Diana Rodríguez, Edna Orozco</p><p><span class="credit">Fundadora y Directora Ruidosa:</span>Francisca Valenzuela</p><p><span class="credit">Agradecimientos:</span>Sylvio Fangundes, Bernardita Méndez , Cynthia Salazar y Cristián Valenzuela</p>',
         'footer-text-1': 'Diseñado y desarrollado por',
-        'footer-text-2': 'para'
+        'footer-text-2': 'para',
+        'disparidad-norte': 'norte global',
+        'disparidad-latam': 'latinoamericano',
+        'disparidad-otros': 'otros'
 
     },
     'english' : {
@@ -82,7 +85,22 @@ const text = {
         'reports': 'Download the full reports',
         'credits': '<p><span class="credit">Researchers:</span>Natalia Sánchez González, Daniela Paz Moyano Dávila</p><p><span class="credit">Ruidosa Project Manager:</span>Diego S. Porzio</p><p><span class="credit">Collaborators and consultants:</span></p><p>Criteria Entertainment — Diana Rodríguez, Edna Orozco</p><p><span class="credit">Ruidosa Founder and Director:</span>Francisca Valenzuela</p><p><span class="credit">Acknowledgements:</span>Sylvio Fangundes, Bernardita Méndez , Cynthia Salazar y Cristián Valenzuela</p>',
         'footer-text-1': 'Designed and developed by',
-        'footer-text-2': 'for'
-
+        'footer-text-2': 'for',
+        'disparidad-norte': 'global north',
+        'disparidad-latam': 'latin american',
+        'disparidad-otros': 'others'
     }
+};
+
+const vizLabels = {
+    'Todos los artistas': 'All artists',
+    'Todos los años': 'All years',
+    'Bandas de mujeres': 'Female bands',
+    'Solista mujer': 'Female solo',
+    'Bandas mixtas': "Mixed bands",
+    'Bandas de hombres': "Male bands",
+    'Solista hombre': "Male solo",
+    "Solista no binarie": "Non-binary solo",
+    'mujeres': 'female', 
+    'hombres': 'male'
 }
