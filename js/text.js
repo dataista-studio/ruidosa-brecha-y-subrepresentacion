@@ -101,6 +101,13 @@ const vizLabels = {
     'Bandas de hombres': "Male bands",
     'Solista hombre': "Male solo",
     "Solista no binarie": "Non-binary solo",
-    'mujeres': 'female', 
-    'hombres': 'male'
+    'Distribuidora': 'Distributors',
+    'Música en Vivo': "live music", 
+    'Recaudadoras': 'Collectors',
+    'Cargos operativos': 'Operational positions',
+    'Ejecutivos Intermedios': 'Middle management',
+    'Otros / sin clasificar': 'Others',
+    'Repre. gremial o institucional': 'Institutional representation',
+    'Talento': 'Artistic development',
+    'Suma total': 'Total'
 }

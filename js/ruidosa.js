@@ -292,7 +292,7 @@ Promise.all([
                         const datum = data3.find(
                             dat => (dat["tipo banda"] === d && dat.pais === state.hovered3)
                         );
-                        return `${datum[state.anios3]}% ${d}`
+                        return `${datum[state.anios3]}% ${language === 'spanish' ? d : vizLabels[d]}`
                     })
 
             g.selectAll(".country-label")
@@ -465,7 +465,7 @@ Promise.all([
                 .attr("class", "text-legend")
                 .attr("x", IS_MOBILE() ? 0 : 10)
                 .attr("y", d => IS_MOBILE() ? y(d) - 4 : y(d) + y.bandwidth()/2 + 12)
-                .text(d => d)
+                .text(d => language === 'spanish' ? d : (vizLabels[d] || d))
 
         g.selectAll("rect")
             .data(D => D.map(d => (d.key = D.key, d)))
@@ -496,7 +496,9 @@ Promise.all([
                 // .style("text-anchor", "end")
                 .style("left", d => `${x(d[0][1]) - 80}px`)
                 .style("top", d => "12px")
-                .html(d => d[0].key === 'Mujer' ? 'mujeres' : 'hombres')
+                .html(d => d[0].key === 'Mujer'
+                    ? (language === 'spanish' ? 'mujeres' : 'female') 
+                    : (language === 'spanish' ? 'hombres' : 'male'))
     }
 
     updatePlot4(data4, svg4);
@@ -542,7 +544,7 @@ Promise.all([
                 .style("text-anchor", IS_MOBILE() ? "begin" : "end")
                 .attr("x", IS_MOBILE() ? x(0) : x(0) - 10)
                 .attr("y", d => IS_MOBILE() ? y(d) - 4 : y(d) + y.bandwidth()/2 + 12)
-                .text(d => d)
+                .text(d => language === 'spanish' ? d : (vizLabels[d] || d))
 
         d3.select("#toma-de-decisiones")
             .selectAll(".toma-rect")
