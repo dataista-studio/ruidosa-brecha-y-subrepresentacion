@@ -183,12 +183,39 @@ body {
     display: inline-block;
 }
 
-#festivales-circulo {
+.festivales {
+  width: 143px !important;
+  height: 143px !important;
   margin: 40px 0 20px 140px;
 }
 
-#companias-circulo {
+.companias {
+  width: 168px !important;
+  height: 168px !important;
   margin-left: 20px;
+  margin-top: 200px;
+}
+
+.festivales .bubble-text, 
+.companias .bubble-text {
+  height: 30%;
+  margin-top: 25%;
+}
+
+.bubble-text .head-bubble,
+.bubble-text .body-bubble {
+  display: table-row;
+}
+
+.bubble-text .head-bubble {
+  font-size: 48px;
+  line-height: 48px;
+  padding: 20px 0;
+}
+
+.bubble-text .body-bubble {
+  font-size: 18px;
+  line-height: 18px;
 }
 
 .title2 {
@@ -477,6 +504,7 @@ body {
     vertical-align: middle;
     display: table-cell;
   }
+  
 
   .bubble1 {
     width: 322px;
@@ -701,17 +729,29 @@ body {
   .festivales,
   .companias {
     display: inline-block;
-    width: 45%
   }
 
-  #festivales-circulo {
+  .festivales {
     margin-left: 10px;
     margin-top: 20px;
   }
 
-  #companias-circulo {
+  .companias {
     margin-left: 10px;
     margin-top: 20px;
+  }
+
+  .festivales.bubble,
+  .companias.bubble {
+    color: #282828 !important;
+  }
+
+  .companias.purple {
+      background-color: var(--purple);
+  }
+
+  .festivales.orange {
+      background-color: var(--orange);
   }
 
   .arriba-del-escenario-wrapper,
