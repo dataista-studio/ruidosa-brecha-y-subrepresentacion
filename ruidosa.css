@@ -283,6 +283,7 @@ body {
 .download .dropdown {
     width: 490px;
     max-width: 100%;
+    text-align: center;
 }
 
 .download .dropbtn {
