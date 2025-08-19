@@ -18,12 +18,13 @@ const state = {
 let language = 'spanish';
 
 const updateText = (language) => {
-    console.log(language)
     const keys = Object.keys(text[language]);
     keys.forEach(key => {
         d3.select(`.${key}`)
             .html(text[language][key])
-    })
+    });
+    d3.select(".section2")
+        .style("width", `${language === 'spanish' ? 808 : 472}px`);
 }
 
 const updateLanguageButtons = () => {
