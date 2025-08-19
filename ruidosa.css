@@ -28,6 +28,22 @@ body {
     margin: 0 auto;
 }
 
+.translation {
+  width: 100%;
+  text-align: center;
+  margin: 14px 0;
+}
+
+.translation span {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.selected {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 .section {
   margin-top: 80px;
   margin-bottom: 20px;

@@ -15,6 +15,33 @@ const state = {
     anios3: "2024"
 }
 
+let language = 'spanish';
+
+const updateText = (language) => {
+    console.log(language)
+    const keys = Object.keys(text[language]);
+    keys.forEach(key => {
+        d3.select(`.${key}`)
+            .html(text[language][key])
+    })
+}
+
+const updateLanguageButtons = () => {
+    d3.select(".translation").selectAll("span")
+    .data(['spanish', 'english'])
+    .join('span')
+    .attr("class", d => d === language ? 'selected' : '')
+    .html(d => d === 'spanish' ? 'Versión en español' : 'English version')
+    .on('click', (_, d) => {
+        language = d;
+        updateText(language);
+        updateLanguageButtons();
+    });
+}
+
+updateLanguageButtons();
+updateText(language);
+
 Promise.all([
     d3.csv('datos/arriba del escenario.csv'),
     d3.csv('datos/disparidad geografica.csv'),
