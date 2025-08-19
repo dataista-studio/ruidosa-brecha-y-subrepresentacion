@@ -596,7 +596,7 @@ Promise.all([
     
     const updateLanguageButtons = () => {
         d3.select(".translation").selectAll("span")
-        .data(['spanish', 'english'])
+        .data(['english', 'spanish'])
         .join('span')
         .attr("class", d => d === language ? 'selected' : '')
         .html(d => d === 'spanish' ? 'Versión en español' : 'English version')
@@ -610,6 +610,84 @@ Promise.all([
     
     updateLanguageButtons();
     updateText(language);
+
+    const addBackgroundImage = (imageObj) => {
+        d3.select(".wrapper")
+            .append("img")
+            .attr("class", "background-image")
+            .attr("src", `images/background/${imageObj.imageName}.png`)
+            .style("top", `${imageObj.reference}px`)
+            .style(imageObj.position, "0");
+    }
+    
+    const addBackgroundImages = () => {
+        const backgroundImages = [
+            {
+                'imageName': 'keyboard',
+                'reference': 2001,
+                'position': 'right'
+            },
+            {
+                'imageName': 'drums',
+                'reference': 2335,
+                'position': 'left'
+            },
+            {
+                'imageName': 'mouth',
+                'reference': 4044,
+                'position': 'left'
+            },
+            {
+                'imageName': 'megafono',
+                'reference': 4830,
+                'position': 'right'
+            },
+            {
+                'imageName': 'speakers',
+                'reference': 5124,
+                'position': 'left'
+            },
+            {
+                'imageName': 'stick',
+                'reference': 5761,
+                'position': 'right'
+            },
+            {
+                'imageName': 'scream',
+                'reference': 6761,
+                'position': 'left'
+            },
+            {
+                'imageName': 'vinyl',
+                'reference': 6965,
+                'position': 'right'
+            },
+            {
+                'imageName': 'fists',
+                'reference': 7606,
+                'position': 'left'
+            },
+            {
+                'imageName': 'eye-draw',
+                'reference': 8703,
+                'position': 'left'
+            },
+            {
+                'imageName': 'mouth-draw',
+                'reference': 8852,
+                'position': 'right'
+            }
+        ]
+    
+        backgroundImages.forEach(d => {
+            addBackgroundImage(d);
+        })
+        
+    }
+    
+    if (!IS_MOBILE()) {
+        addBackgroundImages();
+    }
 })
 
 function updateHeight() {
