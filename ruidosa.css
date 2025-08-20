@@ -798,7 +798,7 @@ body {
     background-size: auto auto;
     margin-bottom: 0 !important;
     display: inline-block;
-    padding-right: 40px;
+    background-size: contain;
   }
 
   .dropdowns {
