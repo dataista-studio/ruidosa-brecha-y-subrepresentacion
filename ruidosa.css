@@ -93,20 +93,20 @@ body {
 }
 
 .quote2:after {
-    background-image: url("images/quote1face.svg");
+    background-image: url("images/quote2face.svg");
     content: "";
-    width: 370px;
+    width: 332px;
     content: " ";
     position: absolute;
-    right: -290px;
+    right: -295px;
     top: 60px;
-    height: 330px;
+    height: 300px;
 }
 
 .quote3:before {
-    background-image: url("images/quote1face.svg");
+    background-image: url("images/quote3face.svg");
     content: "";
-    width: 370px;
+    width: 332px;
     content: " ";
     position: absolute;
     left: -322px;
