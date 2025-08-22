@@ -679,16 +679,14 @@ Promise.all([
     
         backgroundImages.forEach(d => {
             addBackgroundImage(d);
-        })
-
-        updateHeight();
-
-        
+        })        
     }
     
     if (!IS_MOBILE()) {
         addBackgroundImages();
     }
+
+    updateHeight();
 })
 
 function updateHeight() {
