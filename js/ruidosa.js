@@ -569,8 +569,6 @@ Promise.all([
 
     updatePlot5(data5, svg5);
 
-    updateHeight();
-
     const updateText = (language) => {
         const keys = Object.keys(text[language]);
         keys.forEach(key => {
@@ -682,6 +680,9 @@ Promise.all([
         backgroundImages.forEach(d => {
             addBackgroundImage(d);
         })
+
+        updateHeight();
+
         
     }
     
