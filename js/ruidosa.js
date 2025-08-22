@@ -699,7 +699,10 @@ function updateHeight() {
 
 window.addEventListener("resize", (event) => {
     updateHeight();
-})
+});
+window.addEventListener("load", (event) => {
+    updateHeight();
+});
 
 window.onclick = function (event) {
     if (!event.target.matches("#dropbtn-artist")) {
